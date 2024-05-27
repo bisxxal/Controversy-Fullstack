@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export const StoreContext = createContext();
 import { formatDistanceToNow, parseISO } from 'date-fns';
 
- 
+
+export const StoreContext = createContext();
 
 const StoreContextProvider = (props) => {
     const navigate = useNavigate()
@@ -69,7 +69,6 @@ setUpdatedPost(responce.data)
             }
         };
 
-
         updateFriends();
     }, [findId]);
 
@@ -87,7 +86,6 @@ setUpdatedPost(responce.data)
                 await featchUser(userI)
                 await featchUserFriend(userI)
                 await mightknowfriend()
-                // await likeThePost()
             }
         };
 
@@ -99,6 +97,7 @@ setUpdatedPost(responce.data)
         dark, setDark,url,token ,setToken,updatePost,userId ,findId ,likeThePost, 
         likeId ,setLikeId ,addfriendOrRemove, setFindId ,setUserId,logout ,mightknow,userinfo ,
          setUserInfo,friendsinfo,setFriendsInfo ,isDarkMode,toggleDarkMode,formatTimestampToAgo };
+         
     return (
         <StoreContext.Provider value={data}>
             {props.children}

@@ -49,13 +49,14 @@ function Post() {
       setImage(null);  
     }  
   };
+
   const onSumbitcomment = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("comment", comment); 
-    formData.append("userId", userinfo._id); 
-    const responce  = await axios.patch(url+`/post/${likeId}/comment` , {userId:userinfo._id, comment})
-    console.log(responce.data)
+    formData.append("firstName", userinfo.firstName ); 
+    const responce  = await axios.patch(url+`/post/${likeId}/comment` , {firstName:userinfo.firstName, comment})
+
   };
  
   return (
@@ -189,7 +190,7 @@ function Post() {
                   <h1 className="mt-3 font-semibold">Top Comments :</h1>
                     <div className="mt-3">
                      <h1 className=""> {item.comments.map((com, idx) => {
-                        return <p className="bg-zinc-800 rounded-md w-[70%] text-sm py-1 px-3 mb-1 text-zinc-400" key={idx}>@SomeOne : <span className="text-white font-mediu">{com.comment}</span></p>;
+                        return <p className="bg-zinc-800 rounded-md w-[70%] text-sm py-1 px-3 mb-1 text-zinc-400" key={idx}>@ {com.firstName? com.firstName: "SomeOne "} : <span className="text-white font-mediu">{com.comment}</span></p>;
                       })}
                       </h1>
                     </div>

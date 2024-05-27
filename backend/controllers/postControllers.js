@@ -93,8 +93,8 @@ export const likePost = async(req ,res)=>{
 export const commentPost = async (req, res) => {
     try {
         const { id } = req.params;
-        const { userId, comment } = req.body; 
-        if (!userId || !comment) {
+        const { firstName, comment } = req.body; 
+        if ( !comment) {
             return res.status(400).json({ message: "userId and comment are required" });
         }
         
@@ -104,7 +104,7 @@ export const commentPost = async (req, res) => {
             return res.status(404).json({ message: "Post not found" });
         }
          
-        post.comments.push({ comment });
+        post.comments.push({ comment,firstName });
          
         const updatedPost = await post.save();
         

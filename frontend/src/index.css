@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body::-webkit-scrollbar{
+    width: 0;
+     
+}
+
+.signlogo {
+    font-family: "Bebas Neue";
+    /* font-weight: 400;
+    font-style: normal; */
+  }
+*{
+    font-family: "Poppins";
+    font-size: 14px;
+}

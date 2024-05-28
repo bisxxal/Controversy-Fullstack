@@ -56,7 +56,7 @@ function Post() {
     formData.append("comment", comment); 
     formData.append("firstName", userinfo.firstName ); 
     const responce  = await axios.patch(url+`/post/${likeId}/comment` , {firstName:userinfo.firstName, comment})
-
+    setTriggerEffect(!triggerEffect);
   };
  
   return (
@@ -118,8 +118,8 @@ function Post() {
                 <div className="flex flex-col px-4 pt-4">
                   <div className="flex   items-center ">
                     <img
-                    onClick={() => navigate(`/profile/${item._id}`)}
-                      className="w-10 h-10 rounded-full object-cover object-center"
+                    onClick={() => navigate(`/profile/${item.userId}`)}
+                      className="w-10 h-10 rounded-full object-cover cursor-pointer object-center"
                       src={`${url}/images/${item.userPicturePath}`}
                       alt=""
                     />
@@ -145,7 +145,7 @@ function Post() {
                   
                 </div>
                 <div className="flex justify-between w-full px-14">
-                    <h1 className={`${userLikedPost ? 'bg-[#ff00004 ':''} flex gap-2  hover:bg-zinc-700 px-3 py-1 rounded-full  items-center`}>
+                    <h1 className={`${userLikedPost ? 'bg-[#ff00004 ':''} flex gap-2 cursor-pointer  hover:bg-zinc-700 px-3 py-1 rounded-full  items-center`}>
  
                   <AiOutlineLike onClick={async()=>{ 
                       setLikeId(item._id);
@@ -153,16 +153,16 @@ function Post() {
                           await likeThePost(item._id, userinfo._id);
                           setTriggerEffect(!triggerEffect);
                       }
-                    }} className={`${userLikedPost ? 'text-red-600 text-[24px] ':''} text-[22px] `} />
+                    }} className={`${userLikedPost ? 'text-red-600  text-[24px] ':''} text-[22px] `} />
                   {updatePost ?Object.keys(updatePost.likes).length :Object.keys(item.likes).length}
                     </h1>
                   <h2 className="flex items-center gap-2 hover:bg-zinc-700 px-3 py-1 rounded-full  ">
-                    <FaEye /> {Math.floor(Math.random() * 1000)}
+                    <FaEye /> {item.views}
                   </h2>
                   <h2 onClick={() => setShowCommentBoxForPost(item._id === showCommentBoxForPost ? null : item._id)}
-                   className="flex items-center gap-2 hover:bg-zinc-700 px-3 py-1 rounded-full  " >
+                   className="flex items-center gap-2 cursor-pointer  hover:bg-zinc-700 px-3 py-1 rounded-full  " >
                   <BiCommentDetail 
-                   className="text-[21px]" />{item.comments.length}
+                   className="text-[21px] " />{item.comments.length}
                  
                  
                   </h2>

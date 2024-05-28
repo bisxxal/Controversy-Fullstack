@@ -39,7 +39,7 @@ const StoreContextProvider = (props) => {
         
     } 
       const mightknowfriend= async(id)=>{
-        const responce  = await axios.post(url+`/user/allfriends`)
+        const responce  = await axios.post(url+`/user/allfriends`,{id})
         setMightknow(responce.data.allFriend)
         
     } 
@@ -85,7 +85,7 @@ setUpdatedPost(responce.data)
                 
                 await featchUser(userI)
                 await featchUserFriend(userI)
-                await mightknowfriend()
+                await mightknowfriend(userI)
             }
         };
 

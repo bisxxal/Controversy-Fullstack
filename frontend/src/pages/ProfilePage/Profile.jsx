@@ -19,6 +19,8 @@ function Profile() {
     isDarkMode,
     url,
     logout,
+    likeThePost,
+    setLikeId
   } = useContext(StoreContext);
   const [postdata, setPostdata] = useState([]);
   const [friend, setFriend] = useState([]);
@@ -29,16 +31,16 @@ function Profile() {
     const fetchData = async (e) => {
       const responce = await axios.get(`${url}/post/${id}/posts`);
       if (responce.data) {
-        setPostdata(responce.data.post);
+        const reversedPosts = responce.data.post.reverse();  
+        setPostdata(reversedPosts);
       } else {
         console.log("error");
       }
     }; 
     const featchfriend= async()=>{
-      const responce  = await axios.get(url+`/user/${id}`)
-      // if(responce.data.success){
+      const responce  = await axios.get(url+`/user/${id}`) 
         setFriend(responce.data)   
-      // }
+ 
     
   }
     fetchData();
@@ -151,6 +153,9 @@ function Profile() {
       <div className="px-3 w-full">
         {postdata
           ? postdata.map((item, index) => {
+            const likesArray = Array.isArray(item.likes) ? item.likes : Object.keys(item.likes);
+            const userLikedPost = likesArray.some((like) => like === userinfo._id);
+
               return (
                 <div
                   key={index}
@@ -194,26 +199,26 @@ function Profile() {
                     )}
                   </div>
                   <div className="flex justify-between w-full px-14">
-                    <h1 className="flex gap-2  hover:bg-zinc-700 px-3 py-1 rounded-full  items-center">
+                    <h1 className="flex gap-2  hover:bg-zinc-700 px-3 py-1 rounded-full  cursor-pointer  items-center">
                       <AiOutlineLike
                         onClick={async () => {
                           setLikeId(item._id);
                           if (item._id && userinfo._id) {
                             await likeThePost(item._id, userinfo._id);
-                            setTriggerEffect(!triggerEffect);
+                            // setTriggerEffect(!triggerEffect);
                           }
                         }}
-                        className="text-[22px] "
+                        className={`${userLikedPost ? 'text-red-600 text-[24px] ':''}text-[22px] `}
                       />
                       {updatePost
                         ? Object.keys(updatePost.likes).length
                         : Object.keys(item.likes).length}
                     </h1>
                     <h2 className="flex items-center gap-2 hover:bg-zinc-700 px-3 py-1 rounded-full  ">
-                      <FaEye /> {Math.floor(Math.random() * 1000)}
+                      <FaEye /> {item.views}
                     </h2>
                     <h2 className="flex items-center gap-2 hover:bg-zinc-700 px-3 py-1 rounded-full  ">
-                      <BiCommentDetail className="text-[21px]" />
+                      <BiCommentDetail className="text-[21px] cursor-pointer"  />
                       {item.comments.length}
                     </h2>
                   </div>

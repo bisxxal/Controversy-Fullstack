@@ -9,7 +9,10 @@ function Navbar() {
     <div className='flex items-center justify-between fixed px-3 lg:px-10 backdrop-blur-[2px] bg-[#0000007e] w-full h-[60px]'>
       {
         token?
-        <img onClick={() => navigate(`/profile/${userinfo._id}`)}   className='w-[45px] lg:w-[55px] h-[45px] lg:h-[52px] object-cover object-centerv rounded-lg' src={`${url}/images/${userinfo.picturePath}`} alt="" />
+        <div className='flex items-center gap-3 text-[19px]'>
+          <img onClick={() => navigate(`/profile/${userinfo._id}`)}   className=' cursor-pointer w-[45px] lg:w-[50px] h-[45px] lg:h-[50px] object-cover object-centerv rounded-xl' src={`${url}/images/${userinfo.picturePath}`} alt="" />
+          <h1 className=' leading-[0]'>Hii <span className='font-bold text-green-500 text-[20px]'> {userinfo.firstName} </span> 👋</h1>
+        </div>
 :''
       }
         <div className='  mx-auto flex justify-between'>

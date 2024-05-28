@@ -2,8 +2,7 @@ import userModel from "../models/userModel.js";
 
 export const getUser = async(req,res)=>{
     try {
-        const{id}= req.params
-        // console.log(id);
+        const{id}= req.params 
         const user =await userModel.findById(id)
         res.status(200).json(user);
     } catch (error) {
@@ -13,9 +12,9 @@ export const getUser = async(req,res)=>{
 } 
 export const allfriends = async(req,res)=>{
     try{
-        // const{id}= req.params
-        const allFriend =await userModel.find({})
-        res.status(200).json({allFriend});
+        const{id}= req.body 
+        const allFriend = await userModel.find({ _id: { $ne: id } }, '_id firstName lastName picturePath location occupation');
+        res.status(200).json({allFriend}); 
     }
     catch (error) {
         console.log("error in allfriends routes=>>>",error);
@@ -24,8 +23,7 @@ export const allfriends = async(req,res)=>{
 }
 export const getUserFriends = async (req,res)=>{
     try {
-        const{id}= req.params
-        // console.log(id);
+        const{id}= req.params 
         const user =await userModel.findById(id);
         const friends = await Promise.all(
             user.friends.map((id)=>userModel.findById(id))

@@ -14,7 +14,7 @@ function Sidebar() {
     <div className={` w-[400px] ${isDarkMode?'bg-[#d2d2d2]' :'bg-zinc-800 '}  rounded-md py-3 `}>
         <div className='user-profile px-3'>
         <div className={`flex items-center ${isDarkMode?' border-b-zinc-400' :' border-b-zinc-600 '} border-b-[2px]  pb-3 `}>
-                <img  onClick={() => navigate(`/profile/${userinfo._id}`)}   className='w-10 h-10 rounded-full object-cover object-center' src={`${url}/images/${userinfo.picturePath}`} alt="" />
+                <img  onClick={() => navigate(`/profile/${userinfo._id}`)}   className=' cursor-pointer w-10 h-10 rounded-full object-cover object-center' src={`${url}/images/${userinfo.picturePath}`} alt="" />
  
                     <div className='ml-5 text-[13px]'>
                     <h1 className=' text-lg font-medium'>{userinfo.firstName} {userinfo.lastName}</h1>
@@ -64,7 +64,7 @@ function Sidebar() {
                     return( 
                          <div key={index} className='flex mt-2 items-center bg-[#48484833] px-3 rounded-md py-1 justify-between'>
                 <div className='flex items-center'>
-                <img className='w-10 h-10 rounded-full object-cover object-center' onClick={() => navigate(`/profile/${item._id}`)}  src={`${url}/images/${item.picturePath}`} alt="" />
+                <img className='w-10 h-10 rounded-full object-cover object-center cursor-pointer' onClick={() => navigate(`/profile/${item._id}`)}  src={`${url}/images/${item.picturePath}`} alt="" />
                     <div className='ml-5 text-[13px]'>
                     <h1 className=' text-[16px]'>{item.firstName} {item.lastName}</h1>
                     <p className='text-[#676767]'>{item.occupation}</p>

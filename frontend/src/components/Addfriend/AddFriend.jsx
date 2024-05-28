@@ -11,14 +11,17 @@ function AddFriend() {
   return (
    <div>
      <div className={`w-[300px] min-h-0 ${isDarkMode?'bg-[#d2d2d2]' :'bg-zinc-800 '} py-2 px-5 rounded-md `}>
-      <h1 className='my-3 text-lg text-zinc-300'>People You Might Be Know ...</h1>
+      
+      {mightknow ? 
+      <h1 className='my-3 text-lg text-zinc-300'>People You Might Be Know ...</h1>:''
+    }
       
       {
         mightknow ? mightknow.map((item , index)=>{
           return(
              <div key={index} className='flex mt-3 items-center bg-[#5b5b5b6e] rounded-md px-2 py-1   mb-3 justify-between'>
                 <div className='flex items-center'>
-                <img className='w-10 h-10 rounded-full object-cover' onClick={() => navigate(`/profile/${item._id}`)}  src={`${url}/images/${item.picturePath}`} alt="" />
+                <img className='w-10 h-10 rounded-full cursor-pointer object-cover' onClick={() => navigate(`/profile/${item._id}`)}  src={`${url}/images/${item.picturePath}`} alt="" />
                     <div className='ml-5 text-[13px]'>
                     <h1 className=' text-[16px]'>{item.firstName} {item.lastName}</h1>
                     <p className='text-[#878787]'>{item.occupation}</p>

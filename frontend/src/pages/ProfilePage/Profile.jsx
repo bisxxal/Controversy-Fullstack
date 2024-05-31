@@ -20,7 +20,7 @@ function Profile() {
     url,
     logout,
     likeThePost,
-    setLikeId
+    setLikeId,token
   } = useContext(StoreContext);
   const [postdata, setPostdata] = useState([]);
   const [friend, setFriend] = useState([]);
@@ -29,7 +29,7 @@ function Profile() {
 
   useEffect(() => {
     const fetchData = async (e) => {
-      const responce = await axios.get(`${url}/post/${id}/posts`);
+      const responce = await axios.get(`${url}/post/${id}/posts`,{headers:{token}});
       if (responce.data) {
         const reversedPosts = responce.data.post.reverse();  
         setPostdata(reversedPosts);

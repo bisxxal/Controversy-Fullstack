@@ -7,6 +7,7 @@ import { StoreContext } from '../context/Context';
 function Login() {
     const navigate = useNavigate()
     const [image , setImage] = useState(false)
+    const [error , setError] = useState('')
   
     const [currState , setCurrState] =useState("Login")
     const {token,url ,setToken  ,setUserId} = useContext(StoreContext)
@@ -50,7 +51,7 @@ function Login() {
             navigate('/home')
           }
           else{ 
-            alert(responce.data.message)
+            setError(responce.data.message)
           }
 
         } 
@@ -70,7 +71,8 @@ function Login() {
           navigate('/home')
         }
         else{ 
-          alert(responce.data.message)
+          // alert(responce.data.message)
+          setError(responce.data.message)
         }
         } 
        
@@ -107,14 +109,22 @@ function Login() {
                 </>
                 } 
             </div>
+            {
+              error ?   <p className=' font-bold text-red-500'>{error}</p>:''
+            }
+          
             <button type='sumbit' className=' bg-[#0095ff7d]   font-bold px-7 py-2 rounded-full '>{currState === 'Sign UP'?'Create account' :'Login' }</button>
             <div className='condition flex w-full gap-3 text-[13px] items-center'>
                
                   </div>
              {currState === "Login"
 
-             ? <p className='   text-center '>Create a new  account ? <Link className=' text-blue-500' onClick={()=> setCurrState("Sign UP")}>Click here</Link> </p>
-             : <p className='   text-center '>Already have an account ? <Link  className=' text-blue-500'onClick={()=> setCurrState("Login")}>Click here</Link> </p>
+             ? <p className='   text-center '>Create a new  account ? <Link className=' text-blue-500' onClick={()=> {setCurrState("Sign UP") 
+              setError('')
+             }}>Click here</Link> </p>
+             : <p className='   text-center '>Already have an account ? <Link  className=' text-blue-500'onClick={()=> {setCurrState("Login") 
+              setError('')
+             }}>Click here</Link> </p>
              }
           
            

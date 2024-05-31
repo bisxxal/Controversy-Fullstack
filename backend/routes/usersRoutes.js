@@ -6,9 +6,9 @@ import { addRemoveFriend, allfriends, getUser, getUserFriends } from "../control
 const router = express.Router();
 
 router.get("/:id", getUser);
-router.get("/:id/friends", getUserFriends);
-router.post("/allfriends", allfriends );
-router.patch("/:id/:friendId", addRemoveFriend);
+router.post("/allfriends",authMiddleware, allfriends );
+router.get("/:id/friends",authMiddleware, getUserFriends);
+router.patch("/:id/:friendId" , addRemoveFriend);
 
 
 export default router;

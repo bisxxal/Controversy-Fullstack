@@ -16,7 +16,7 @@ function Post() {
   const [showCommentBoxForPost, setShowCommentBoxForPost] = useState(null);
 
   const getPost = async () => {
-    const responce = await axios.get(`${url}/post`);
+    const responce = await axios.get(`${url}/post`,{headers:{token}});
     if (responce.data.sucess) { 
       const reversedPosts = responce.data.post.reverse();  
       setPost(reversedPosts);
@@ -55,7 +55,7 @@ function Post() {
     const formData = new FormData();
     formData.append("comment", comment); 
     formData.append("firstName", userinfo.firstName ); 
-    const responce  = await axios.patch(url+`/post/${likeId}/comment` , {firstName:userinfo.firstName, comment})
+   await axios.patch(url+`/post/${likeId}/comment` , {firstName:userinfo.firstName, comment},{headers:{token}})
     setTriggerEffect(!triggerEffect);
   };
  

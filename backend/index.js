@@ -10,6 +10,7 @@ import userRoutes from './routes/usersRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import {createPost} from './controllers/postControllers.js' 
 import bodyParser from "body-parser";
+import authMiddleware from "./middleware/auth.js";
 const app = express() 
 dotenv.config(); 
 app.use(express.json()); 
@@ -29,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
  
 app.use ('/images' , express.static('uploads'))
 app.post("/auth/register", upload.single("image"),register);
-app.post("/posts",upload.single("image"), createPost); //put authMiddleWear here
+app.post("/posts", authMiddleware, upload.single("image"), createPost); //put authMiddleWear here
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);

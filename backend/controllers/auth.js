@@ -14,7 +14,7 @@ export const login = async (req, res)=>{
           }
           const cheakPassword = await bcrypt.compare(password ,  user.password)
           if(!cheakPassword){
-            if (!cheakPassword) return res.status(400).json({ message: "Invalid credentials. " });
+            if (!cheakPassword) return res.json({success:false, message: "Email or Password Incorrect" });
           }
 
           const token = createToken(user._id);

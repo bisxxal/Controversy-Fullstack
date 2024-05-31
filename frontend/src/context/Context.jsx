@@ -28,23 +28,24 @@ const StoreContextProvider = (props) => {
         return formatDistanceToNow(parsedTimestamp, { addSuffix: true });
       } 
 
-    const featchUser= async(id)=>{
-        const responce  = await axios.get(url+`/user/${id}`)
+    const featchUser= async(id,token)=>{
+        const responce  = await axios.get(url+`/user/${id}`,{headers:{token}})
         setUserInfo(responce.data)
         
     } 
-      const featchUserFriend= async(id)=>{ 
-        const responce  = await axios.get(url+`/user/${id}/friends`)
+      const featchUserFriend= async(id ,token)=>{ 
+        const responce  = await axios.get(url+`/user/${id}/friends`,{headers:{token}})
         setFriendsInfo(responce.data)
         
     } 
-      const mightknowfriend= async(id)=>{
-        const responce  = await axios.post(url+`/user/allfriends`,{id})
+      const mightknowfriend= async(id,token)=>{
+        const responce  = await axios.post(url+`/user/allfriends`,{id},{headers:{token}})
         setMightknow(responce.data.allFriend)
         
     } 
-  const addfriendOrRemove= async(id,friendId)=>{
-      await axios.patch(`http://localhost:5000/user/${id}/${friendId}`)
+  const addfriendOrRemove= async(id,friendId ,token)=>{
+      await axios.patch(`http://localhost:5000/user/${id}/${friendId}`,{headers:{token}})
+      console.log('addd');
   
 } 
 const logout = ()=>{
@@ -57,22 +58,22 @@ const logout = ()=>{
   }
 
   const likeThePost  = async(likeId , userId)=>{
-    const responce  = await axios.patch(url+`/post/${likeId}/like` , {userId})
+    const responce  = await axios.patch(url+`/post/${likeId}/like` , {userId},{headers:{token}})
 setUpdatedPost(responce.data)
   }
    
     useEffect(() => {
         const updateFriends = async () => {
             if (userId && findId  && token) {
-                await addfriendOrRemove(userId, findId);
-                await featchUserFriend(userId)
+                await addfriendOrRemove(userId, findId ,token);
+                await featchUserFriend(userId ,token)
             }
         };
 
         updateFriends();
     }, [findId]);
 
-
+// console.log(token);
     useEffect(() => {
         
         const getList = async () => {
@@ -83,9 +84,9 @@ setUpdatedPost(responce.data)
                 setUserId(userI);
                 setToken(userToken);
                 
-                await featchUser(userI)
-                await featchUserFriend(userI)
-                await mightknowfriend(userI)
+                await featchUser(userI ,userToken)
+                await featchUserFriend(userI ,userToken)
+                await mightknowfriend(userI,userToken)
             }
         };
 

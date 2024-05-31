@@ -25,6 +25,7 @@ export const getUserFriends = async (req,res)=>{
     try {
         const{id}= req.params 
         const user =await userModel.findById(id);
+        
         const friends = await Promise.all(
             user.friends.map((id)=>userModel.findById(id))
         );
@@ -43,7 +44,7 @@ export const getUserFriends = async (req,res)=>{
     }
     export const addRemoveFriend =async (req,res)=>{
         try {
-            const{id ,friendId}= req.params
+            const{id ,friendId}= req.params 
             const user =await userModel.findById(id);
             const friend =await userModel.findById(friendId);
 
@@ -70,7 +71,8 @@ export const getUserFriends = async (req,res)=>{
                 }
             );
             res.status(200).json(formatedFriends)
-        } catch (error) {
+        }
+     catch (error) {
     console.log("error in addremovefriend routes=>>>",error);
     res.status(404).json({message:error.message})
     }

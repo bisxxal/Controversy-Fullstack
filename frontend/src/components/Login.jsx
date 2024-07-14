@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { StoreContext } from '../../context/Context'
+import { StoreContext } from '../context/Context';
 import { useNavigate } from 'react-router-dom'
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 function Navbar() {

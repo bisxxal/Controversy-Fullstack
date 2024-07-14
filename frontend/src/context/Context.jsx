@@ -9,7 +9,7 @@ export const StoreContext = createContext();
 const StoreContextProvider = (props) => {
     const navigate = useNavigate()
     const [dark, setDark] = useState(false);
-    const url = 'http://localhost:5000'
+    const url = 'https://controversy-backend.onrender.com'
     const [token , setToken] = useState('')
     const [userId  ,setUserId] = useState([])
     const [userinfo , setUserInfo] = useState([]) 
